@@ -22,17 +22,17 @@ const observer = new IntersectionObserver(
 const lastCardObserver = new IntersectionObserver(
   (entries) => {
     const lastCard = entries[0];
+    console.log(lastCard)
     if (!lastCard.isIntersecting) return;
     loadNewCard();
     lastCardObserver.unobserve(lastCard.target);
 
     lastCardObserver.observe(document.querySelector(".card:last-child"));
   },
-  { rootMargin: "100px" }
+  {}
 );
-
 lastCardObserver.observe(document.querySelector(".card:last-child"));
-
+console.log(document.querySelector(".card:last-child"))
 cards.forEach((card) => {
   observer.observe(card);
 });
@@ -43,6 +43,6 @@ function loadNewCard() {
     newCard.textContent = "New Card";
     newCard.classList.add("card");
     observer.observe(newCard);
-    cardContainer.append(cards);
+    cardContainer.append(newCard);
   }
 }
