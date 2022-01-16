@@ -5,7 +5,7 @@ const observer = new IntersectionObserver(
     entries.forEach((entry) => {
       entry.target.classList.toggle("show", entry.isIntersecting);
       // do not hide the card after scroll up
-      if (entry.isIntersecting) observer.unobserve(entry.target);
+      // if (entry.isIntersecting) observer.unobserve(entry.target);
     });
     // console.log(entries);
   },
@@ -19,17 +19,14 @@ const observer = new IntersectionObserver(
   }
 );
 
-const lastCardObserver = new IntersectionObserver(
-  (entries) => {
-    const lastCard = entries[0];
-    if (!lastCard.isIntersecting) return;
-    loadNewCard();
-    lastCardObserver.unobserve(lastCard.target);
+const lastCardObserver = new IntersectionObserver((entries) => {
+  const lastCard = entries[0];
+  if (!lastCard.isIntersecting) return;
+  loadNewCard();
+  lastCardObserver.unobserve(lastCard.target);
 
-    lastCardObserver.observe(document.querySelector(".card:last-child"));
-  },
-  { rootMargin: "100px" }
-);
+  lastCardObserver.observe(document.querySelector(".card:last-child"));
+});
 
 lastCardObserver.observe(document.querySelector(".card:last-child"));
 
@@ -37,12 +34,14 @@ cards.forEach((card) => {
   observer.observe(card);
 });
 
+// fetch imitation
+
 function loadNewCard() {
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 1; i++) {
     const newCard = document.createElement("div");
     newCard.textContent = "New Card";
     newCard.classList.add("card");
     observer.observe(newCard);
-    cardContainer.append(cards);
+    cardContainer.append(newCard);
   }
 }
