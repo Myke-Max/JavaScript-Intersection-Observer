@@ -29,7 +29,7 @@ const lastCardObserver = new IntersectionObserver((entries) => {
 });
 
 lastCardObserver.observe(document.querySelector(".card:last-child"));
-
+// console.log(document.querySelector(".card:last-child"));
 cards.forEach((card) => {
   observer.observe(card);
 });
@@ -45,3 +45,37 @@ function loadNewCard() {
     cardContainer.append(newCard);
   }
 }
+
+// MutationObserver
+
+const mutationObserver = new MutationObserver((entries) => {
+  console.log(entries);
+});
+// observe text node of one element
+// mutationObserver.observe(cardContainer.children[0].childNodes[0]
+
+mutationObserver.observe(cardContainer, {
+  // observe changes insaid
+  // childList: true,
+
+  // observe  attributes,old attributes , and filter
+  // attributes: true,
+  // attributeOldValue: true,
+  // attributeFilter: ["id"],
+
+  // observe all text inside the perent
+  subtree: true,
+
+  // observe text inside something
+  characterData: true,
+  characterDataOldValue: true,
+});
+
+// // child exemple
+// cardContainer.children[0].remove();
+// setTimeout(() => {
+//   cardContainer.appendChild(document.createElement("div"));
+// }, 2000);
+
+// // attributes exemple
+// cardContainer.id = "cardID";
