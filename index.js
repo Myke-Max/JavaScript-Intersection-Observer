@@ -78,4 +78,4 @@ mutationObserver.observe(cardContainer, {
 // }, 2000);
 
 // // attributes exemple
-// cardContainer.id = "cardID";
+// cardContainer.id = "cardIDs";
